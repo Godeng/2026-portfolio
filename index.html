@@ -875,6 +875,65 @@
     font-size: 13px;
     margin-bottom: 32px;
   }
+  /* ── MODAL CAROUSEL ── */
+  .modal-carousel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 32px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: var(--warm-gray-100);
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.35s ease;
+  }
+  .carousel-track img {
+    width: 100%;
+    flex-shrink: 0;
+    object-fit: cover;
+    max-height: 360px;
+    display: block;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.85);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    z-index: 2;
+  }
+  .carousel-btn:hover { background: rgba(255,255,255,1); }
+  .carousel-prev { left: 12px; }
+  .carousel-next { right: 12px; }
+  .carousel-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+  .carousel-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .carousel-dot.active { background: rgba(255,255,255,1); }
+
   .modal-video-thumb {
     position: relative;
     width: 100%;
@@ -1268,21 +1327,19 @@
     <div class="section-tag">Why Social Impact</div>
     <h2 class="section-title" style="font-family: var(--font-kr);">서비스기획자가<br>사회공헌을<br>선택한 이유</h2>
     <ul class="why-list">
-      <li>IT 서비스에서 수백만 사용자의 경험을 개선하며 "진짜 필요한 사람들에게 닿는 서비스"를 만들고 싶어졌습니다.</li>
-      <li>UX 리서치 과정에서 만난 사회적 약자들의 이야기가 제 기획의 방향을 바꾸었습니다.</li>
-      <li>기획의 언어—공감, 문제정의, 해결책 설계—가 사회문제를 푸는 언어와 같다는 것을 깨달았습니다.</li>
-      <li>성장 지표 너머, 사람의 삶이 실제로 나아지는 경험을 만들고 싶습니다.</li>
+      <li>기술이 삶에 미치는 영향력이 크다고 생각했습니다. 그 방향성에 '사람'을 넣고 싶어서 서비스기획을 시작했습니다. 일하며 사람들의 행동을 제품에 녹이는 방법을 익혔고, 실제로 수백만 명의 경험에 닿는 일을 했습니다. 하지만 숫자 너머, 사람들의 삶이 실제로 변화했는지를 확인하고 싶은 마음이 계속 남았습니다.</li>
+      <li>그래서 잠시 회사 밖으로 나왔습니다. 우즈베키스탄에서 어린이의 목소리로 놀이터를 만들고, 내면의 힘을 찾고 싶은 여성들이 2박 3일 해방될 수 있는 캠핑을 운영했습니다. 사회공헌 분야에서 일한다는 것이 어떤 의미인지도 직접 교육으로 배웠습니다.</li>
+      <li>서비스기획은 충분히 해왔습니다. 사용자 니즈를 발굴하고, 사용성을 설계하고, 접근성 대응에도 직접 참여했습니다. 관련 부서와의 협업과 서비스 실행, 1인분은 해낼 수 있습니다.</li>
+      <li>솔직히 말하면, 사회공헌 분야의 경험은 부족합니다. 그러나 사람의 니즈를 발굴하고, 문제를 정의하고, 더 나은 경험을 설계하는 기획의 방법론은 사회공헌에서도 다르지 않다고 생각합니다. 그 접점에서, 마음도 충분합니다. 배경이나 조건 때문에 변화를 누리지 못하는 사람이 없도록 기획하고 싶습니다. 어디에 살든, 장애가 있든, 나이가 어떻든.</li>
     </ul>
   </div>
 
   <div class="why-right reveal">
     <div class="why-quote">
       <div class="why-quote-text">
-        좋은 서비스는<br>
-        사람을 <em>더 나은 상황으로</em> 데려갑니다.<br><br>
-        저는 그 "더 나은 상황"이<br>
-        <em>더 많은 사람에게</em> 닿는<br>
-        기획을 하고 싶습니다.
+        토스뱅크에서,<br><br>
+        <em>사람을 위해</em><br>
+        기획하겠습니다.
       </div>
     </div>
   </div>
@@ -1300,9 +1357,6 @@
       <a href="https://www.linkedin.com/in/dayoung-oh-362a34161/" class="contact-link" target="_blank" rel="noopener noreferrer">
         💼 LinkedIn
       </a>
-      <a href="#" class="contact-link">
-        📄 이력서 다운로드
-      </a>
     </div>
   </div>
 </section>
@@ -1313,7 +1367,18 @@
     <button class="modal-close" onclick="closeModal('modal-biz-train')">✕</button>
     <div class="modal-category">Service Planning · Kakao Mobility</div>
     <h2 class="modal-title">비즈 기차 · 비즈 도보<br>런칭</h2>
-    <div class="modal-image-placeholder">이미지를 추가해주세요</div>
+    <div class="modal-carousel" id="carousel-biz-train">
+      <div class="carousel-track">
+        <img src="버티컬런칭_참고이미지1.jpg" alt="버티컬 런칭 참고이미지 1">
+        <img src="버티컬런칭_참고이미지2.jpg" alt="버티컬 런칭 참고이미지 2">
+      </div>
+      <button class="carousel-btn carousel-prev" onclick="carouselMove('carousel-biz-train', -1)">&#8249;</button>
+      <button class="carousel-btn carousel-next" onclick="carouselMove('carousel-biz-train', 1)">&#8250;</button>
+      <div class="carousel-dots">
+        <span class="carousel-dot active" onclick="carouselGo('carousel-biz-train', 0)"></span>
+        <span class="carousel-dot" onclick="carouselGo('carousel-biz-train', 1)"></span>
+      </div>
+    </div>
     <div class="modal-desc">
       <p><strong>상황</strong><br>
       주문량 상승율이 3개월째 둔화됨.</p>
@@ -1375,7 +1440,18 @@
     <button class="modal-close" onclick="closeModal('modal-biz-signup')">✕</button>
     <div class="modal-category">Service Planning · Kakao Mobility</div>
     <h2 class="modal-title">카카오T 비즈<br>가입동선 개선</h2>
-    <div class="modal-image-placeholder">이미지를 추가해주세요</div>
+    <div class="modal-carousel" id="carousel-biz-signup">
+      <div class="carousel-track">
+        <img src="가입동선개선_참고이미지1.jpg" alt="가입동선 개선 참고이미지 1">
+        <img src="가입동선개선_참고이미지2.jpg" alt="가입동선 개선 참고이미지 2">
+      </div>
+      <button class="carousel-btn carousel-prev" onclick="carouselMove('carousel-biz-signup', -1)">&#8249;</button>
+      <button class="carousel-btn carousel-next" onclick="carouselMove('carousel-biz-signup', 1)">&#8250;</button>
+      <div class="carousel-dots">
+        <span class="carousel-dot active" onclick="carouselGo('carousel-biz-signup', 0)"></span>
+        <span class="carousel-dot" onclick="carouselGo('carousel-biz-signup', 1)"></span>
+      </div>
+    </div>
     <div class="modal-desc">
       <p><strong>상황</strong><br>
       국내 중소기업 종사자 비중은 81.3%이지만, 카카오T 비즈니스의 가입 고객 가운데 중소기업 직원 수는 절반 미만.</p>
@@ -1437,6 +1513,23 @@
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
   });
+
+  // Carousel
+  function carouselGo(id, index) {
+    const carousel = document.getElementById(id);
+    const track = carousel.querySelector('.carousel-track');
+    const dots = carousel.querySelectorAll('.carousel-dot');
+    const total = track.children.length;
+    index = (index + total) % total;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    carousel.dataset.index = index;
+  }
+  function carouselMove(id, dir) {
+    const carousel = document.getElementById(id);
+    const current = parseInt(carousel.dataset.index || 0);
+    carouselGo(id, current + dir);
+  }
 
   // Timeline filter
   document.querySelectorAll('.filter-btn').forEach(btn => {
