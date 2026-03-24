@@ -477,6 +477,62 @@
   .tag-coral { background: var(--coral-pale); color: var(--coral-deep); }
   .tag-neutral { background: var(--warm-gray-100); color: var(--warm-gray-600); }
 
+  /* ── TIMELINE FILTER ── */
+  .timeline-filter {
+    display: flex; gap: 8px;
+    margin-top: 40px; margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-family: var(--font-kr);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 1px;
+    border: 1px solid var(--warm-gray-200);
+    background: transparent;
+    color: var(--warm-gray-600);
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.2s ease;
+  }
+  .filter-btn:hover { border-color: var(--coral); color: var(--coral); }
+  .filter-btn.active {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: var(--warm-white);
+  }
+
+  /* ── MINI TIMELINE ITEM ── */
+  .timeline-item--mini {
+    padding-bottom: 28px;
+  }
+  .timeline-item--mini .timeline-dot {
+    width: 7px; height: 7px;
+    left: -3px; top: 10px;
+    border-color: var(--warm-gray-300);
+    background: var(--warm-white);
+  }
+  .timeline-item--mini .timeline-period {
+    font-size: 10px;
+    color: var(--warm-gray-400);
+  }
+  .timeline-item--mini .timeline-company {
+    font-size: 12px;
+    color: var(--warm-gray-500);
+    margin-bottom: 6px;
+  }
+  .timeline-item--mini .timeline-desc {
+    font-size: 12px;
+    color: var(--warm-gray-400);
+    line-height: 1.7;
+  }
+  .timeline-item--mini .timeline-tags { margin-top: 8px; }
+  .timeline-item--mini .tag { font-size: 10px; padding: 3px 8px; }
+
+  .timeline-item[data-cat] { transition: opacity 0.25s ease, transform 0.25s ease, max-height 0.3s ease; }
+  .timeline-item.hidden-cat { display: none; }
+
   /* ── PROJECTS ── */
   #projects { background: var(--ink); color: var(--warm-white); }
   #projects .section-tag { color: var(--coral-light); }
@@ -1002,11 +1058,16 @@
     <p class="section-sub">서비스기획 현장에서 쌓은 경험들이 사회공헌을 향한 도약의 발판이 됩니다.</p>
   </div>
 
+  <div class="timeline-filter">
+    <button class="filter-btn active" data-filter="all">전체</button>
+    <button class="filter-btn" data-filter="career">커리어</button>
+    <button class="filter-btn" data-filter="social">사회공헌 · 활동</button>
+  </div>
+
   <div class="timeline">
-    <div class="timeline-item reveal">
+    <div class="timeline-item timeline-item--mini reveal" data-cat="social">
       <div class="timeline-dot"></div>
       <div class="timeline-period">2025.10 — 2025.11</div>
-      <div class="timeline-role"></div>
       <div class="timeline-company">서울시공익활동지원센터 체인지파인더</div>
       <div class="timeline-desc">
         임팩트 커리어, 활동가 커리어로의 전환을 위해 참여한 활동가 교육 프로그램. 현직자, 활동 기관과의 접점을 늘리고 함께 활동을 기획할 수 있는 알럼나이 운영.
@@ -1016,10 +1077,10 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal">
+    <div class="timeline-item reveal" data-cat="social">
       <div class="timeline-dot"></div>
       <div class="timeline-period">2025.08</div>
-      <div class="timeline-role"></div>
+      <div class="timeline-role">Event Planner</div>
       <div class="timeline-company">WBC 리트릿캠프 운영기획</div>
       <div class="timeline-desc">
         <a href="#" onclick="openModal('modal-wbc'); return false;" style="display:block; color:inherit; text-decoration:none; padding: 2px 0;">· 100인 리트릿캠프 운영기획 ↗</a>
@@ -1029,10 +1090,10 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal">
+    <div class="timeline-item reveal" data-cat="social">
       <div class="timeline-dot"></div>
       <div class="timeline-period">2025.07 — 2025.08</div>
-      <div class="timeline-role"></div>
+      <div class="timeline-role">Project-based Volunteer</div>
       <div class="timeline-company">서울시 청년해외봉사단</div>
       <div class="timeline-desc">
         <a href="#" onclick="openModal('modal-uzbekistan'); return false;" style="display:block; color:inherit; text-decoration:none; padding: 2px 0;">· 우즈베키스탄 지역 놀이터 개편 ↗</a>
@@ -1044,10 +1105,34 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal">
+    <!-- 기브셔틀 -->
+    <div class="timeline-item timeline-item--mini reveal" data-cat="social">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">2024.10 — 2025.10</div>
+      <div class="timeline-company">카카오 T 기브셔틀 · 한국자원봉사문화 협업</div>
+      <div class="timeline-desc">기업 사회봉사 프로그램 3회 참여. 사회와 연결될 수 있는 다양한 봉사 방법론을 직접 경험하는 탐구의 일환.</div>
+      <div class="timeline-tags">
+        <span class="tag tag-coral">봉사</span>
+        <span class="tag tag-neutral">기업사회공헌</span>
+      </div>
+    </div>
+
+    <!-- 홈리스월드컵 -->
+    <div class="timeline-item timeline-item--mini reveal" data-cat="social">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">2024.09</div>
+      <div class="timeline-company">홈리스월드컵 팀매니저</div>
+      <div class="timeline-desc">국제기구 행사 보조. 다양한 봉사 방법론을 탐구하는 과정에서 참여한 국제기구 협력 활동.</div>
+      <div class="timeline-tags">
+        <span class="tag tag-coral">봉사</span>
+        <span class="tag tag-neutral">국제기구</span>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal" data-cat="career">
       <div class="timeline-dot"></div>
       <div class="timeline-period">2021.03 — 2024.09</div>
-      <div class="timeline-role">Service Planner</div>
+      <div class="timeline-role">Project Manager</div>
       <div class="timeline-company">카카오모빌리티 · 서비스기획</div>
       <div class="timeline-desc">
         <a href="#" onclick="openModal('modal-biz-signup'); return false;" style="display:block; color:inherit; text-decoration:none; padding: 2px 0;">· 카카오T 비즈 가입동선 개선 ↗</a>
@@ -1060,16 +1145,40 @@
       </div>
     </div>
 
-    <div class="timeline-item reveal">
+    <div class="timeline-item reveal" data-cat="career">
       <div class="timeline-dot"></div>
       <div class="timeline-period">2018.05 — 2021.03</div>
-      <div class="timeline-role">Service Planner</div>
+      <div class="timeline-role">Project Manager</div>
       <div class="timeline-company">바로고 · 서비스기획</div>
       <div class="timeline-desc">
       </div>
       <div class="timeline-tags">
         <span class="tag tag-neutral">서비스기획</span>
         <span class="tag tag-neutral">UX 리서치</span>
+      </div>
+    </div>
+
+    <!-- 행복한 모바일 학교 -->
+    <div class="timeline-item timeline-item--mini reveal" data-cat="social">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">2017</div>
+      <div class="timeline-company">행복한 모바일 학교</div>
+      <div class="timeline-desc">지역 복지관에서 고령자를 대상으로 스마트폰 수업 주최. 주 1회 정기 운영.</div>
+      <div class="timeline-tags">
+        <span class="tag tag-coral">봉사</span>
+        <span class="tag tag-neutral">디지털 교육</span>
+      </div>
+    </div>
+
+    <!-- 신바람학교 -->
+    <div class="timeline-item timeline-item--mini reveal" data-cat="social">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">2011</div>
+      <div class="timeline-company">신바람학교</div>
+      <div class="timeline-desc">고려대학교 교내 미화노동자를 대상으로 컴퓨터 수업 주최. 주 1회 정기 운영.</div>
+      <div class="timeline-tags">
+        <span class="tag tag-coral">봉사</span>
+        <span class="tag tag-neutral">디지털 교육</span>
       </div>
     </div>
   </div>
@@ -1085,7 +1194,7 @@
 
   <div class="projects-grid">
     <div class="project-card reveal" id="project-biz-signup" onclick="openModal('modal-biz-signup')" style="cursor:pointer;">
-      <div class="project-num">01 / Service Planning</div>
+      <div class="project-num">01 / Project Manager</div>
       <div class="project-category">Kakao Mobility</div>
       <div class="project-title">카카오T 비즈<br>가입동선 개선</div>
       <div class="project-desc">중소기업 사업주 15명 심층 인터뷰 기반, 비즈니스탭 미가입자 홈 리뉴얼 및 가입 플로우 단축.</div>
@@ -1094,7 +1203,7 @@
     </div>
 
     <div class="project-card reveal" id="project-biz-train" onclick="openModal('modal-biz-train')" style="cursor:pointer;">
-      <div class="project-num">02 / Service Planning</div>
+      <div class="project-num">02 / Project Manager</div>
       <div class="project-category">Kakao Mobility</div>
       <div class="project-title">비즈 기차 · 비즈 도보<br>런칭</div>
       <div class="project-desc">주문량 둔화 돌파를 위한 신규 서비스 출시 우선순위 선정 및 B2B 연동 모듈 기반 마련.</div>
@@ -1103,7 +1212,7 @@
     </div>
 
     <div class="project-card reveal" id="project-uzbekistan" onclick="openModal('modal-uzbekistan')" style="cursor:pointer;">
-      <div class="project-num">03 / Field Project</div>
+      <div class="project-num">03 / Project-based Volunteer</div>
       <div class="project-category">서울시 청년해외봉사단</div>
       <div class="project-title">우즈베키스탄<br>지역 놀이터 개편</div>
       <div class="project-desc">지역 유아·주민 인터뷰 기반 놀이터 개편 기획·실행. 안전·미감·재미 세 기준 모두 80% 이상 만족도 달성.</div>
@@ -1112,7 +1221,7 @@
     </div>
 
     <div class="project-card reveal" id="project-wbc" onclick="openModal('modal-wbc')" style="cursor:pointer;">
-      <div class="project-num">04 / Event Planning</div>
+      <div class="project-num">04 / Event Planner</div>
       <div class="project-category">WBC 리트릿캠프</div>
       <div class="project-title">100인 리트릿캠프<br>운영기획</div>
       <div class="project-desc">2년간의 후기 분석 기반 소외 문제 해결 운영 정책 마련. 타임테이블·숙소·교통·소통 프로그램 전반 기획 및 운영.</div>
@@ -1252,7 +1361,8 @@
       <p><strong>리서치</strong><br>
       지역 유아 20명 대상 그림 인터뷰와 선호 색 설문조사, 어린이와 성인 5명 대상 심층 인터뷰 진행.</p>
       <p><strong>해결</strong><br>
-      나잇대별 선호하는 놀이기구 기준으로 부족했던 모래놀이, 축구장 마련. 선호도가 높았던 빨강·파랑 중심의 재도색과 안전조치 추가.</p>
+      나잇대별 선호하는 놀이기구 기준으로 부족했던 모래놀이, 축구장 마련. 선호도가 높았던 빨강·파랑 중심의 재도색과 안전조치 추가.<br>
+      <a href="https://www.notion.so/3-24f10a208e0a81068f21c3bf618dca13?source=copy_link" target="_blank" rel="noopener noreferrer" style="font-size:13px; color:var(--coral); text-decoration:none;">→ 아이디에이션 · 우선순위화 과정 보기 ↗</a></p>
       <p><strong>성과</strong><br>
       개소식에 100여 명 참여. 안전·미감·재미 세 가지 기준에 대해 모두 80% 이상의 만족도 평가.</p>
     </div>
@@ -1326,6 +1436,22 @@
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Timeline filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.timeline-item[data-cat]').forEach(item => {
+        if (filter === 'all' || item.dataset.cat === filter) {
+          item.classList.remove('hidden-cat');
+        } else {
+          item.classList.add('hidden-cat');
+        }
+      });
+    });
   });
 
   // Scroll reveal
