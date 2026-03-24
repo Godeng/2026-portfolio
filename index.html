@@ -60,6 +60,24 @@
     opacity: 0.5;
   }
 
+  @media (hover: none) {
+    .cursor, .cursor-ring { display: none; }
+  }
+  .tap-ripple {
+    position: fixed;
+    border-radius: 50%;
+    width: 10px; height: 10px;
+    background: var(--coral);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) scale(0);
+    animation: ripple-out 0.5s ease-out forwards;
+  }
+  @keyframes ripple-out {
+    to { transform: translate(-50%, -50%) scale(8); opacity: 0; }
+  }
+
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
@@ -1529,6 +1547,19 @@
     const carousel = document.getElementById(id);
     const current = parseInt(carousel.dataset.index || 0);
     carouselGo(id, current + dir);
+  }
+
+  // Mobile tap ripple
+  if (window.matchMedia('(hover: none)').matches) {
+    document.addEventListener('touchstart', e => {
+      const t = e.touches[0];
+      const el = document.createElement('div');
+      el.className = 'tap-ripple';
+      el.style.left = t.clientX + 'px';
+      el.style.top = t.clientY + 'px';
+      document.body.appendChild(el);
+      el.addEventListener('animationend', () => el.remove());
+    }, { passive: true });
   }
 
   // Timeline filter
